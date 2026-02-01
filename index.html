@@ -28,6 +28,7 @@
       max-height: 90vh;
       display: flex;
       flex-direction: column;
+      overflow: hidden; /* keeps the card contained */
     }
 
     h1 {
@@ -88,15 +89,12 @@
       display: none;
       margin-top: 10px;
       text-align: left;
-
-      max-height: 50vh;
+      max-height: 50vh; /* adjust height as needed */
       overflow-y: auto;
       padding-right: 10px;
-
       animation: fadeIn 1s ease forwards;
-
-      /* iOS momentum scroll */
-      -webkit-overflow-scrolling: touch;
+      -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
+      scroll-behavior: smooth; /* desktop smooth scroll */
     }
 
     .letter h2 {
@@ -138,7 +136,6 @@
 </head>
 
 <body>
-
   <div class="card">
     <h1>Mr. Babe… ❤️</h1>
     <p>Will you be my Valentine?</p>
@@ -154,7 +151,6 @@
 
     <div class="letter" id="letter">
       <h2>My Love,</h2>
-
       <p>
         You once messaged me with a confidence that felt almost bold;
         like you already knew something I hadn’t figured out yet.
@@ -162,7 +158,7 @@
         From the very beginning, there was a sense of knowing with you;
         a quiet certainty I never questioned.
       </p>
-    
+
       <p>
         Being with you feels like exhaling.
         You bring calm where there could be chaos,
@@ -170,7 +166,7 @@
         and steadiness where I sometimes feel unsure.
         With you, I feel deeply loved for exactly who I am.
       </p>
-    
+
       <p>
         From our early dates and long conversations,
         to trips that turned into pieces of our story;
@@ -178,14 +174,14 @@
         You have a way of making moments feel meaningful
         simply by being fully there with me.
       </p>
-    
+
       <p>
         What I admire most about you is not only how you love me in joy,
         but how intentionally present you are in the difficult moments.
         You don’t rush me, you stand beside me, grounded and patient,
         reminding me through your presence that I am never alone.
       </p>
-    
+
       <p>
         I want you to know how incredibly proud I am of you.
         Of the way you work relentlessly toward your goals,
@@ -195,7 +191,7 @@
         Watching you build the life you believe in
         is one of the most attractive and inspiring things about you.
       </p>
-    
+
       <p>
         I admire your faith deeply; the way you commit to it with intention and consistency.
         Your fasting, your prayers, your unwavering discipline
@@ -203,7 +199,7 @@
         and the depth of your values.
         You move with purpose, and it shows in everything you do.
       </p>
-    
+
       <p>
         Thank you for believing in me,
         especially while I am changing my career
@@ -214,7 +210,7 @@
         and steady belief in me.
         You made me feel capable when I doubted myself.
       </p>
-    
+
       <p>
         Loving you feels safe and exciting at the same time.
         I feel chosen, supported, desired, and respected.
@@ -222,7 +218,7 @@
         not rushed, not forced, but built with care.
         Choosing you feels natural, steady, and deeply right.
       </p>
-    
+
       <p>
         I believe our prayers are being answered: one by one,
         exactly when the timing is right.
@@ -230,13 +226,14 @@
         shaping our paths, and preparing a future
         we will walk into together.
       </p>
-    
+
       <p>
         Thank you for loving me the way you do.
         Thank you for being my partner,
         my calm, my strength, and my home.
       </p>
-     <p><strong>Happy Valentine’s Day ❤️</strong></p>
+
+      <p><strong>Happy Valentine’s Day ❤️</strong></p>
       <p style="text-align:right;">Miss Bez</p>
     </div>
   </div>
@@ -286,6 +283,5 @@
       }
     }
   </script>
-
 </body>
 </html>
