@@ -38,7 +38,7 @@
     .buttons {
       margin-top: 10px;
       position: relative;
-      height: 100px;
+      height: 100px; /* Space for the button to move around */
       flex-shrink: 0;
     }
 
@@ -49,13 +49,25 @@
       border: none;
       cursor: pointer;
       position: absolute;
-      transition: left 0.1s ease-out, top 0.1s ease-out;
+      transition: all 0.2s ease-out; /* Smoother movement */
       user-select: none;
       touch-action: manipulation;
     }
 
-    #yesBtn { background: #e63946; color: white; left: 50%; transform: translateX(-110%); z-index: 10; }
-    #noBtn { background: #adb5bd; color: white; left: 50%; transform: translateX(10%); }
+    #yesBtn { 
+      background: #e63946; 
+      color: white; 
+      left: 50%; 
+      transform: translateX(-110%); 
+      z-index: 10; 
+    }
+    
+    #noBtn { 
+      background: #adb5bd; 
+      color: white; 
+      left: 50%; 
+      transform: translateX(10%); 
+    }
 
     .congrats {
       display: none;
@@ -100,7 +112,7 @@
 
     @keyframes floatUp {
       0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
-      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+      100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
     }
 
     .letter::-webkit-scrollbar { width: 6px; }
@@ -109,7 +121,7 @@
 </head>
 
 <body>
-  <audio id="bgMusic" loop preload="auto">
+  <audio id="bgMusic" loop preload="auto" playsinline>
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
@@ -160,18 +172,21 @@
     const congrats = document.getElementById("congrats");
     const buttons = document.getElementById("buttons");
     const question = document.getElementById("question");
-    const card = document.querySelector(".card");
     const music = document.getElementById("bgMusic");
 
     let active = true;
 
     function flee() {
       if (!active) return;
-      const padding = 20;
-      const maxX = card.clientWidth - noBtn.offsetWidth - padding;
-      const maxY = card.clientHeight - noBtn.offsetHeight - padding;
-      const randomX = Math.max(padding, Math.random() * maxX);
-      const randomY = Math.max(padding, Math.random() * maxY);
+      
+      // We calculate movement relative to the card so the button stays visible
+      const parent = document.getElementById("buttons");
+      const maxX = parent.clientWidth - noBtn.offsetWidth;
+      const maxY = parent.clientHeight - noBtn.offsetHeight;
+      
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+      
       noBtn.style.left = randomX + "px";
       noBtn.style.top = randomY + "px";
       noBtn.style.transform = "none";
@@ -179,19 +194,18 @@
     }
 
     noBtn.addEventListener("mouseover", flee);
-    noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); flee(); });
+    noBtn.addEventListener("touchstart", (e) => { 
+      e.preventDefault(); 
+      flee(); 
+    });
 
     yesBtn.addEventListener("click", () => {
       active = false;
       
-      // Chrome/iOS Audio Context fix
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-
-      // Play the song
-      music.play().catch(e => console.log("Music blocked or file missing. Verify song.mp3 naming."));
+      // Start music
+      music.play().catch(e => {
+        console.log("Music interaction required or file missing.");
+      });
       
       buttons.style.display = "none";
       question.style.display = "none";
