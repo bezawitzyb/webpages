@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Hans ❤️ Bezawit</title>
+  <title>Hans ❤️ Bez</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -15,7 +15,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      touch-action: none;
     }
 
     .card {
@@ -26,7 +25,7 @@
       text-align: center;
       max-width: 460px;
       width: 90%;
-      max-height: 90vh; /* keeps card on screen */
+      max-height: 90vh;
       display: flex;
       flex-direction: column;
     }
@@ -56,7 +55,7 @@
       border: none;
       cursor: pointer;
       position: absolute;
-      transition: left 0.15s ease, top 0.15s ease, transform 0.15s ease;
+      transition: left 0.15s ease, top 0.15s ease;
       user-select: none;
     }
 
@@ -84,17 +83,19 @@
       flex-shrink: 0;
     }
 
+    /* ✅ SCROLLABLE LETTER */
     .letter {
       display: none;
       margin-top: 10px;
       text-align: left;
 
-      /* 👇 SCROLL MAGIC */
       max-height: 50vh;
       overflow-y: auto;
-      padding-right: 8px;
+      padding-right: 10px;
 
       animation: fadeIn 1s ease forwards;
+
+      /* iOS momentum scroll */
       -webkit-overflow-scrolling: touch;
     }
 
@@ -124,7 +125,7 @@
       to { transform: translateY(-110vh); opacity: 0; }
     }
 
-    /* Subtle scrollbar styling (desktop only) */
+    /* Desktop scrollbar (WebKit: Chrome, Safari, macOS) */
     .letter::-webkit-scrollbar {
       width: 6px;
     }
@@ -139,7 +140,7 @@
 <body>
 
   <div class="card">
-    <h1>Hans… ❤️</h1>
+    <h1>Mr. Babe… ❤️</h1>
     <p>Will you be my Valentine?</p>
 
     <div class="buttons" id="buttons">
@@ -154,50 +155,92 @@
     <div class="letter" id="letter">
       <h2>My Love,</h2>
 
+      <div class="letter" id="letter">
+  <h2>My Love,</h2>
+
       <p>
-        You once messaged me with a confidence that felt almost bold —
+        You once messaged me with a confidence that felt almost bold;
         like you already knew something I hadn’t figured out yet.
         And somehow, you were right.
-        From the very beginning, there was a quiet sense of knowing with you —
-        a certainty I never questioned.
+        From the very beginning, there was a sense of knowing with you;
+        a quiet certainty I never questioned.
       </p>
-
+    
       <p>
         Being with you feels like exhaling.
         You bring calm where there could be chaos,
         laughter where there could be heaviness,
         and steadiness where I sometimes feel unsure.
-        With you, I don’t feel like I have to prove myself —
-        I feel deeply loved for exactly who I am.
+        With you, I feel deeply loved for exactly who I am.
       </p>
-
+    
       <p>
         From our early dates and long conversations,
-        to trips that became pieces of our story —
-        Middelburg, Austria, Maastricht, Portugal —
+        to trips that turned into pieces of our story;
         every memory feels warmer because it has you in it.
+        You have a way of making moments feel meaningful
+        simply by being fully there with me.
       </p>
-
+    
       <p>
-        I am so proud of you —
-        of the late nights, the discipline,
-        the faith, the fasting,
-        and the way you keep showing up for your future.
+        What I admire most about you is not only how you love me in joy,
+        but how intentionally present you are in the difficult moments.
+        You don’t rush me, you stand beside me, grounded and patient,
+        reminding me through your presence that I am never alone.
       </p>
-
+    
       <p>
-        Thank you for believing in me while I changed paths.
-        Your support made all the difference.
+        I want you to know how incredibly proud I am of you.
+        Of the way you work relentlessly toward your goals,
+        even on the late nights when no one is watching.
+        Of the discipline, focus, and quiet determination
+        you bring to turning your vision into something real.
+        Watching you build the life you believe in
+        is one of the most attractive and inspiring things about you.
       </p>
-
+    
       <p>
+        I admire your faith deeply; the way you commit to it with intention and consistency.
+        Your fasting, your prayers, your unwavering discipline
+        speak to the strength of your character
+        and the depth of your values.
+        You move with purpose, and it shows in everything you do.
+      </p>
+    
+      <p>
+        Thank you for believing in me,
+        especially while I am changing my career
+        and stepping into the unknown.
+        There were moments when things felt uncertain and heavy,
+        and I know, truly, that it would not have been as easy
+        without your encouragement, reassurance,
+        and steady belief in me.
+        You made me feel capable when I doubted myself.
+      </p>
+    
+      <p>
+        Loving you feels safe and exciting at the same time.
+        I feel chosen, supported, desired, and respected.
+        With you, the future feels intentional;
+        not rushed, not forced, but built with care.
+        Choosing you feels natural, steady, and deeply right.
+      </p>
+    
+      <p>
+        I believe our prayers are being answered: one by one,
+        exactly when the timing is right.
         I trust that God is making a way for us,
-        answering our prayers one by one,
-        and preparing a future we will walk into together.
+        shaping our paths, and preparing a future
+        we will walk into together.
       </p>
-
-      <p><strong>Happy Valentine’s Day ❤️</strong></p>
-      <p style="text-align:right;">— Bezawit</p>
+    
+      <p>
+        Thank you for loving me the way you do.
+        Thank you for being my partner,
+        my calm, my strength, and my home.
+      </p>
+     <p><strong>Happy Valentine’s Day ❤️</strong></p>
+      <p style="text-align:right;">Miss Bez</p>
     </div>
   </div>
 
@@ -209,7 +252,11 @@
     const buttons = document.getElementById("buttons");
     const card = document.querySelector(".card");
 
+    let active = true; // disable NO after YES
+
     function flee() {
+      if (!active) return;
+
       const rect = card.getBoundingClientRect();
       const maxX = rect.width - noBtn.offsetWidth;
       const maxY = rect.height - noBtn.offsetHeight;
@@ -223,6 +270,7 @@
     document.addEventListener("touchmove", flee);
 
     yesBtn.addEventListener("click", () => {
+      active = false;
       buttons.style.display = "none";
       congrats.style.display = "block";
       letter.style.display = "block";
@@ -230,7 +278,7 @@
     });
 
     function launchConfetti() {
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; i < 40; i++) {
         const heart = document.createElement("div");
         heart.className = "heart";
         heart.textContent = "❤️";
