@@ -15,7 +15,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      /* Prevents pull-to-refresh on mobile */
       overscroll-behavior-y: none; 
     }
 
@@ -27,24 +26,14 @@
       text-align: center;
       max-width: 460px;
       width: 85%;
-      max-height: 85vh; /* Constraints the card height */
+      max-height: 85vh; 
       display: flex;
       flex-direction: column;
       position: relative;
     }
 
-    h1 {
-      color: #e63946;
-      margin: 0 0 10px 0;
-      flex-shrink: 0;
-    }
-
-    .main-p {
-      color: #444;
-      font-size: 1.05rem;
-      margin-bottom: 20px;
-      flex-shrink: 0;
-    }
+    h1 { color: #e63946; margin: 0 0 10px 0; flex-shrink: 0; }
+    .main-p { color: #444; font-size: 1.05rem; margin-bottom: 20px; flex-shrink: 0; }
 
     .buttons {
       margin-top: 10px;
@@ -65,20 +54,8 @@
       touch-action: manipulation;
     }
 
-    #yesBtn {
-      background: #e63946;
-      color: white;
-      left: 50%;
-      transform: translateX(-110%);
-      z-index: 10;
-    }
-
-    #noBtn {
-      background: #adb5bd;
-      color: white;
-      left: 50%;
-      transform: translateX(10%);
-    }
+    #yesBtn { background: #e63946; color: white; left: 50%; transform: translateX(-110%); z-index: 10; }
+    #noBtn { background: #adb5bd; color: white; left: 50%; transform: translateX(10%); }
 
     .congrats {
       display: none;
@@ -90,7 +67,6 @@
       animation: fadeIn 0.8s ease forwards;
     }
 
-    /* ✅ ENHANCED SCROLLABLE LETTER */
     .letter {
       display: none;
       text-align: left;
@@ -98,33 +74,20 @@
       padding: 10px 15px 10px 5px;
       margin-top: 10px;
       border-top: 1px solid #eee;
-      
-      /* Crucial for iOS/Mobile scrolling */
       flex: 1; 
       -webkit-overflow-scrolling: touch; 
       overscroll-behavior-y: contain;
-      
       animation: fadeIn 1s ease forwards;
     }
 
-    .letter h2 {
-      color: #e63946;
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    .letter p {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #444;
-    }
+    .letter h2 { color: #e63946; text-align: center; margin-top: 10px; }
+    .letter p { font-size: 1rem; line-height: 1.6; color: #444; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Floating hearts */
     .heart {
       position: absolute;
       bottom: -20px;
@@ -139,18 +102,17 @@
       to { transform: translateY(-110vh); opacity: 0; }
     }
 
-    /* Custom Scrollbar */
-    .letter::-webkit-scrollbar {
-      width: 6px;
-    }
-    .letter::-webkit-scrollbar-thumb {
-      background: rgba(230,57,70,0.3);
-      border-radius: 10px;
-    }
+    .letter::-webkit-scrollbar { width: 6px; }
+    .letter::-webkit-scrollbar-thumb { background: rgba(230,57,70,0.3); border-radius: 10px; }
   </style>
 </head>
 
 <body>
+  <audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
   <div class="card">
     <h1 id="title">Mr. Babe… ❤️</h1>
     <p id="question" class="main-p">Will you be my Valentine?</p>
@@ -161,7 +123,7 @@
     </div>
 
     <div class="congrats" id="congrats">
-      🎉 You made the only correct choice!!! ❤️
+      🎉 You made the correct choice.
     </div>
 
     <div class="letter" id="letter">
@@ -187,7 +149,7 @@
       <p>Thank you for loving me the way you do. Thank you for being my partner, my calm, my strength, and my home.</p>
 
       <p><strong>Happy Valentine’s Day ❤️</strong></p>
-      <p style="text-align:right; padding-bottom: 20px;">Mrs Babe </p>
+      <p style="text-align:right; padding-bottom: 20px;">Miss Bez</p>
     </div>
   </div>
 
@@ -197,37 +159,35 @@
     const letter = document.getElementById("letter");
     const congrats = document.getElementById("congrats");
     const buttons = document.getElementById("buttons");
-    const title = document.getElementById("title");
     const question = document.getElementById("question");
     const card = document.querySelector(".card");
+    const music = document.getElementById("bgMusic");
 
     let active = true;
 
     function flee() {
       if (!active) return;
-      // Keep "No" button movement within the card boundaries
       const padding = 20;
       const maxX = card.clientWidth - noBtn.offsetWidth - padding;
       const maxY = card.clientHeight - noBtn.offsetHeight - padding;
-
       const randomX = Math.max(padding, Math.random() * maxX);
       const randomY = Math.max(padding, Math.random() * maxY);
 
       noBtn.style.left = randomX + "px";
       noBtn.style.top = randomY + "px";
-      noBtn.style.transform = "none"; // Remove the initial centering transform
+      noBtn.style.transform = "none";
       noBtn.textContent = "No 😛";
     }
 
-    // Use mouseover for desktop and touchstart for mobile for better "flee" feel
     noBtn.addEventListener("mouseover", flee);
-    noBtn.addEventListener("touchstart", (e) => {
-        e.preventDefault(); // Prevents accidental clicks on mobile
-        flee();
-    });
+    noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); flee(); });
 
     yesBtn.addEventListener("click", () => {
       active = false;
+      
+      // Play Music
+      music.play().catch(error => console.log("Audio playback failed:", error));
+      
       buttons.style.display = "none";
       question.style.display = "none";
       congrats.style.display = "block";
