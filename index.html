@@ -20,14 +20,15 @@
 
     .card {
       background: white;
-      padding: 40px;
+      padding: 32px 28px;
       border-radius: 24px;
       box-shadow: 0 25px 50px rgba(0,0,0,0.2);
       text-align: center;
       max-width: 460px;
       width: 90%;
-      position: relative;
-      z-index: 2;
+      max-height: 90vh; /* keeps card on screen */
+      display: flex;
+      flex-direction: column;
     }
 
     h1 {
@@ -37,7 +38,7 @@
 
     p {
       color: #444;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       line-height: 1.6;
     }
 
@@ -45,6 +46,7 @@
       margin-top: 30px;
       position: relative;
       height: 90px;
+      flex-shrink: 0;
     }
 
     button {
@@ -70,27 +72,36 @@
       color: white;
       left: 50%;
       transform: translateX(20%);
-      pointer-events: none; /* NEVER clickable */
+      pointer-events: none;
     }
 
     .congrats {
       display: none;
       font-size: 1.2rem;
       color: #e63946;
-      margin-top: 20px;
+      margin: 20px 0 10px;
       animation: fadeIn 0.8s ease forwards;
+      flex-shrink: 0;
     }
 
     .letter {
       display: none;
-      margin-top: 25px;
-      animation: fadeIn 1s ease forwards;
+      margin-top: 10px;
       text-align: left;
+
+      /* 👇 SCROLL MAGIC */
+      max-height: 50vh;
+      overflow-y: auto;
+      padding-right: 8px;
+
+      animation: fadeIn 1s ease forwards;
+      -webkit-overflow-scrolling: touch;
     }
 
     .letter h2 {
       color: #e63946;
       text-align: center;
+      margin-top: 0;
     }
 
     @keyframes fadeIn {
@@ -111,6 +122,16 @@
     @keyframes floatUp {
       from { transform: translateY(0); opacity: 0.7; }
       to { transform: translateY(-110vh); opacity: 0; }
+    }
+
+    /* Subtle scrollbar styling (desktop only) */
+    .letter::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .letter::-webkit-scrollbar-thumb {
+      background: rgba(230,57,70,0.4);
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -155,73 +176,24 @@
         to trips that became pieces of our story —
         Middelburg, Austria, Maastricht, Portugal —
         every memory feels warmer because it has you in it.
-        You have a way of making moments feel meaningful
-        simply by being fully there with me.
       </p>
 
       <p>
-        What I admire most about you is not only how you love me in joy,
-        but how intentionally present you are in the difficult moments.
-        You don’t rush me or try to fix me —
-        you stand beside me, grounded and patient,
-        reminding me through your presence that I am never alone.
-        That kind of love is rare.
+        I am so proud of you —
+        of the late nights, the discipline,
+        the faith, the fasting,
+        and the way you keep showing up for your future.
       </p>
 
       <p>
-        I want you to know how incredibly proud I am of you.
-        Of the late nights you spend working toward your goals,
-        even when no one sees the effort.
-        Of the discipline, focus, and quiet determination
-        you bring to turning your vision into reality.
-        Watching you build the life you believe in
-        inspires me more than you know.
+        Thank you for believing in me while I changed paths.
+        Your support made all the difference.
       </p>
 
       <p>
-        I admire your faith deeply —
-        the way you commit to it with intention and unwavering discipline.
-        Your fasting, your prayers, your consistency
-        reflect the strength of your character
-        and the depth of your values.
-        You lead with purpose, and it shows.
-      </p>
-
-      <p>
-        Thank you for believing in me,
-        especially while I’ve been changing my career
-        and stepping into the unknown.
-        There were moments when things felt heavy and uncertain,
-        and I know — truly —
-        that it would not have been as manageable
-        without your encouragement, reassurance,
-        and steady belief in me.
-        You made me feel capable when I doubted myself.
-      </p>
-
-      <p>
-        Loving you feels safe and exciting at the same time.
-        I feel chosen, supported, desired, and respected.
-        With you, the future feels intentional —
-        not rushed, not forced,
-        but built with care and faith.
-        Choosing you feels natural, steady, and deeply right.
-      </p>
-
-      <p>
-        I believe our prayers are being answered —
-        not all at once, but one by one,
-        exactly when the timing is right.
         I trust that God is making a way for us,
-        shaping our paths,
-        and preparing a future
-        we will walk into together.
-      </p>
-
-      <p>
-        Thank you for loving me the way you do.
-        Thank you for being my partner,
-        my calm, my strength, and my home.
+        answering our prayers one by one,
+        and preparing a future we will walk into together.
       </p>
 
       <p><strong>Happy Valentine’s Day ❤️</strong></p>
@@ -242,23 +214,12 @@
       const maxX = rect.width - noBtn.offsetWidth;
       const maxY = rect.height - noBtn.offsetHeight;
 
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
-
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
+      noBtn.style.left = Math.random() * maxX + "px";
+      noBtn.style.top = Math.random() * maxY + "px";
       noBtn.textContent = "No 😛";
     }
 
-    document.addEventListener("mousemove", (e) => {
-      const btnRect = noBtn.getBoundingClientRect();
-      const dx = e.clientX - (btnRect.left + btnRect.width / 2);
-      const dy = e.clientY - (btnRect.top + btnRect.height / 2);
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance < 120) flee();
-    });
-
+    document.addEventListener("mousemove", flee);
     document.addEventListener("touchmove", flee);
 
     yesBtn.addEventListener("click", () => {
@@ -283,4 +244,3 @@
 
 </body>
 </html>
-
