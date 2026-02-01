@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Hans ❤️ Bezawit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <style>
     body {
       font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
@@ -13,6 +15,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      touch-action: none;
     }
 
     .card {
@@ -22,6 +25,7 @@
       box-shadow: 0 25px 50px rgba(0,0,0,0.2);
       text-align: center;
       max-width: 460px;
+      width: 90%;
       position: relative;
       z-index: 2;
     }
@@ -40,7 +44,7 @@
     .buttons {
       margin-top: 30px;
       position: relative;
-      height: 80px;
+      height: 90px;
     }
 
     button {
@@ -50,7 +54,8 @@
       border: none;
       cursor: pointer;
       position: absolute;
-      transition: all 0.2s ease;
+      transition: left 0.15s ease, top 0.15s ease, transform 0.15s ease;
+      user-select: none;
     }
 
     #yesBtn {
@@ -65,11 +70,20 @@
       color: white;
       left: 50%;
       transform: translateX(20%);
+      pointer-events: none; /* NEVER clickable */
+    }
+
+    .congrats {
+      display: none;
+      font-size: 1.2rem;
+      color: #e63946;
+      margin-top: 20px;
+      animation: fadeIn 0.8s ease forwards;
     }
 
     .letter {
       display: none;
-      margin-top: 20px;
+      margin-top: 25px;
       animation: fadeIn 1s ease forwards;
       text-align: left;
     }
@@ -88,110 +102,177 @@
     .heart {
       position: absolute;
       bottom: -20px;
-      font-size: 20px;
+      font-size: 22px;
       animation: floatUp 6s linear infinite;
-      opacity: 0.6;
+      opacity: 0.7;
+      pointer-events: none;
     }
 
     @keyframes floatUp {
-      from { transform: translateY(0); opacity: 0.6; }
+      from { transform: translateY(0); opacity: 0.7; }
       to { transform: translateY(-110vh); opacity: 0; }
     }
   </style>
 </head>
+
 <body>
 
   <div class="card">
     <h1>Hans… ❤️</h1>
     <p>Will you be my Valentine?</p>
 
-    <div class="buttons">
+    <div class="buttons" id="buttons">
       <button id="yesBtn">Yes 💖</button>
       <button id="noBtn">No 🙃</button>
+    </div>
+
+    <div class="congrats" id="congrats">
+      🎉 Congratulations — you made the one and only correct choice.
     </div>
 
     <div class="letter" id="letter">
       <h2>My Love,</h2>
 
-        <p>
-        You once messaged me with a confidence that felt slightly ridiculous —
-        like you already <em>knew</em> we’d click in real life.
-        And somehow… you were right.
-        </p>
+      <p>
+        You once messaged me with a confidence that felt almost bold —
+        like you already knew something I hadn’t figured out yet.
+        And somehow, you were right.
+        From the very beginning, there was a quiet sense of knowing with you —
+        a certainty I never questioned.
+      </p>
 
-        <p>
-        From the moment you walked into my life, everything felt warmer, softer,
-        and somehow more right. You make me laugh when I don’t even feel like smiling,
-        you support me in ways you probably don’t even notice, and you make ordinary
-        moments feel special just by being there.
-        </p>
+      <p>
+        Being with you feels like exhaling.
+        You bring calm where there could be chaos,
+        laughter where there could be heaviness,
+        and steadiness where I sometimes feel unsure.
+        With you, I don’t feel like I have to prove myself —
+        I feel deeply loved for exactly who I am.
+      </p>
 
-        <p>
-        From early dates and late-night conversations, to trips that turned into
-        memories I’ll carry forever — Middelburg, Austria, Maastricht, Portugal —
-        you’ve become my favorite constant.
-        </p>
+      <p>
+        From our early dates and long conversations,
+        to trips that became pieces of our story —
+        Middelburg, Austria, Maastricht, Portugal —
+        every memory feels warmer because it has you in it.
+        You have a way of making moments feel meaningful
+        simply by being fully there with me.
+      </p>
 
-        <p>
-        You stood with me not just in the light moments, but in the heavy ones too.
-        When I was grieving, you didn’t try to fix me — you stayed.
-        And that told me everything I needed to know about the kind of man you are.
-        </p>
+      <p>
+        What I admire most about you is not only how you love me in joy,
+        but how intentionally present you are in the difficult moments.
+        You don’t rush me or try to fix me —
+        you stand beside me, grounded and patient,
+        reminding me through your presence that I am never alone.
+        That kind of love is rare.
+      </p>
 
-        <p>
-        Loving you is easy. Choosing you is easy.
-        And today, tomorrow, and every day after,
-        I choose you — happily and wholeheartedly.
-        </p>
+      <p>
+        I want you to know how incredibly proud I am of you.
+        Of the late nights you spend working toward your goals,
+        even when no one sees the effort.
+        Of the discipline, focus, and quiet determination
+        you bring to turning your vision into reality.
+        Watching you build the life you believe in
+        inspires me more than you know.
+      </p>
 
-        <p>
-        Loving you feels calm and exciting at the same time.
-        Safe, but never boring.
-        Certain, but always chosen.
-        </p>
+      <p>
+        I admire your faith deeply —
+        the way you commit to it with intention and unwavering discipline.
+        Your fasting, your prayers, your consistency
+        reflect the strength of your character
+        and the depth of your values.
+        You lead with purpose, and it shows.
+      </p>
 
-        <p>
-        Thank you for being you.
-        Thank you for being mine.
-        </p>
+      <p>
+        Thank you for believing in me,
+        especially while I’ve been changing my career
+        and stepping into the unknown.
+        There were moments when things felt heavy and uncertain,
+        and I know — truly —
+        that it would not have been as manageable
+        without your encouragement, reassurance,
+        and steady belief in me.
+        You made me feel capable when I doubted myself.
+      </p>
 
-        <p><strong>Happy Valentine’s Day ❤️</strong></p>
-        <p style="text-align:right;">— Bezawit</p>
+      <p>
+        Loving you feels safe and exciting at the same time.
+        I feel chosen, supported, desired, and respected.
+        With you, the future feels intentional —
+        not rushed, not forced,
+        but built with care and faith.
+        Choosing you feels natural, steady, and deeply right.
+      </p>
 
+      <p>
+        I believe our prayers are being answered —
+        not all at once, but one by one,
+        exactly when the timing is right.
+        I trust that God is making a way for us,
+        shaping our paths,
+        and preparing a future
+        we will walk into together.
+      </p>
+
+      <p>
+        Thank you for loving me the way you do.
+        Thank you for being my partner,
+        my calm, my strength, and my home.
+      </p>
+
+      <p><strong>Happy Valentine’s Day ❤️</strong></p>
+      <p style="text-align:right;">— Bezawit</p>
+    </div>
   </div>
 
   <script>
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const letter = document.getElementById("letter");
+    const congrats = document.getElementById("congrats");
+    const buttons = document.getElementById("buttons");
+    const card = document.querySelector(".card");
 
-    function moveNoButton() {
-      const card = document.querySelector(".card");
-      const maxX = card.offsetWidth - noBtn.offsetWidth;
-      const maxY = card.offsetHeight - noBtn.offsetHeight;
+    function flee() {
+      const rect = card.getBoundingClientRect();
+      const maxX = rect.width - noBtn.offsetWidth;
+      const maxY = rect.height - noBtn.offsetHeight;
 
       const x = Math.random() * maxX;
       const y = Math.random() * maxY;
 
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
+      noBtn.textContent = "No 😛";
     }
 
-    noBtn.addEventListener("mouseover", moveNoButton);
-    noBtn.addEventListener("touchstart", moveNoButton);
+    document.addEventListener("mousemove", (e) => {
+      const btnRect = noBtn.getBoundingClientRect();
+      const dx = e.clientX - (btnRect.left + btnRect.width / 2);
+      const dy = e.clientY - (btnRect.top + btnRect.height / 2);
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < 120) flee();
+    });
+
+    document.addEventListener("touchmove", flee);
 
     yesBtn.addEventListener("click", () => {
-      document.querySelector(".buttons").style.display = "none";
+      buttons.style.display = "none";
+      congrats.style.display = "block";
       letter.style.display = "block";
       launchConfetti();
     });
 
-    /* Confetti effect */
     function launchConfetti() {
-      for (let i = 0; i < 40; i++) {
+      for (let i = 0; i < 50; i++) {
         const heart = document.createElement("div");
         heart.className = "heart";
-        heart.innerText = "❤️";
+        heart.textContent = "❤️";
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.animationDuration = 4 + Math.random() * 3 + "s";
         document.body.appendChild(heart);
@@ -202,3 +283,4 @@
 
 </body>
 </html>
+
